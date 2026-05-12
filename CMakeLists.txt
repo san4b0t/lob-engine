@@ -22,3 +22,7 @@ FetchContent_MakeAvailable(googletest)
 
 add_executable(run_tests tests/test_orderbook.cpp)
 target_link_libraries(run_tests lob_core gtest_main)
+
+# Benchmark Target
+add_executable(run_benchmarks benchmarks/bench_orderbook.cpp)
+target_link_libraries(run_benchmarks lob_core)
