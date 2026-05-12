@@ -1,0 +1,34 @@
+name: C++ CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y cmake valgrind
+
+      - name: Build Debug with Sanitizers
+        run: |
+          mkdir build_debug && cd build_debug
+          cmake -DCMAKE_BUILD_TYPE=Debug ..
+          make
+
+      - name: Run Tests (ASan)
+        run: ./build_debug/run_tests
+
+      - name: Build Release for Valgrind
+        run: |
+          mkdir build_release && cd build_release
+          cmake -DCMAKE_BUILD_TYPE=Release ..
+          make
+
+      - name: Run Valgrind
+        run: valgrind --leak-check=full --error-exitcode=1 ./build_release/run_tests

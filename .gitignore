@@ -1,0 +1,8 @@
+# Build directories
+/build/
+
+# IDE specific files
+.vscode/
+
+# Compiled object files
+*.o
