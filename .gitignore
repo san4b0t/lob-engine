@@ -1,8 +1,32 @@
-# Build directories
-/build/
+# CMake Build Directories
+build/
+build_*/
+out/
+bin/
 
-# IDE specific files
-.vscode/
+# CMake Generated Files
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
 
-# Compiled object files
+# Compiled Object files and Binaries
 *.o
+*.obj
+*.so
+*.dylib
+*.dll
+*.a
+*.lib
+*.exe
+*.out
+*.app
+
+# OS & IDE Specific
+.DS_Store
+.vscode/
+.idea/
+*.swp
