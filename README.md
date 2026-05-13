@@ -233,14 +233,10 @@ This matching engine is suitable for:
 
 ## 🚧 Future Enhancements
 
-- [ ] **Iceberg Orders**: Hidden liquidity with display quantity
 - [ ] **Stop Orders**: Conditional order activation
 - [ ] **Multi-Symbol Support**: Concurrent order books with sharding
-- [ ] **Event Sourcing**: Full audit trail and replay capability
 - [ ] **Lock-Free Design**: Move to lock-free queues for multi-threading
-- [ ] **Binary Protocol**: FIX/SBE protocol support for realistic input
 - [ ] **Persistence Layer**: Crash recovery and snapshotting
-- [ ] **Metrics Export**: Prometheus-style monitoring hooks
 
 ---
 
@@ -279,5 +275,3 @@ MIT License. See [LICENSE](LICENSE) for details.
 - Uses **Google Test**, **CMake**, and **Docker** for modern C++ workflows
 
 ---
-
-**⚡ Built for speed. Designed for production. Optimized for quant interviews.**
