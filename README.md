@@ -1,6 +1,6 @@
 # Limit Order Book (LOB) Matching Engine
 
-![Build Status](https://github.com/YOUR_USERNAME/lob-matching-engine/workflows/CI/badge.svg)
+![Build Status](https://github.com/san4b0t/lob-engine/actions/workflows/ci.yml/badge.svg)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![C++](https://img.shields.io/badge/C%2B%2B-17-blue.svg)
 
@@ -25,7 +25,7 @@ A **high-performance, production-grade Limit Order Book matching engine** built 
 
 Measured on local hardware with **1,000,000 orders** after warm-up:
 
-=== Benchmark Results ===
+### Benchmark Results ###
 Total Time: 96.617 ms
 Average Latency: 96.62 ns/order
 Throughput: 10,350,141 ops/sec
@@ -44,29 +44,30 @@ Throughput: 10,350,141 ops/sec
 ### Core Data Structures
 
 The engine uses a **three-layer architecture** optimized for speed:
-
+```text
 ┌─────────────────────────────────────────────────────┐
-│ OrderBook (per symbol) │
-│ ┌──────────────────────────────────────────────┐ │
-│ │ std::map<Price, PriceLevel> │ │
-│ │ - Automatically sorted by price │ │
-│ │ - O(log n) price level lookup │ │
-│ └──────────────────────────────────────────────┘ │
-│ ↓ │
-│ ┌──────────────────────────────────────────────┐ │
-│ │ PriceLevel │ │
-│ │ - std::list<Order> (doubly-linked) │ │
-│ │ - FIFO order queue │ │
-│ │ - O(1) insertion at back │ │
-│ └──────────────────────────────────────────────┘ │
-│ ↓ │
-│ ┌──────────────────────────────────────────────┐ │
-│ │ std::unordered_map<OrderID, list::iterator> │ │
-│ │ - O(1) order lookup by ID │ │
-│ │ - O(1) cancellation via iterator │ │
-│ └──────────────────────────────────────────────┘ │
+│ OrderBook (per symbol)                              │
+│                                                     │
+│ ┌─────────────────────────────────────────────────┐ │
+│ │ std::map<Price, PriceLevel>                     │ │
+│ │ - Automatically sorted by price                 │ │
+│ │ - O(log n) price level lookup                   │ │
+│ └─────────────────────────────────────────────────┘ │
+│                          ↓                          │
+│ ┌─────────────────────────────────────────────────┐ │
+│ │ PriceLevel                                      │ │
+│ │ - std::list<Order> (doubly-linked)              │ │
+│ │ - FIFO order queue                              │ │
+│ │ - O(1) insertion at back                        │ │
+│ └─────────────────────────────────────────────────┘ │
+│                          ↓                          │
+│ ┌─────────────────────────────────────────────────┐ │
+│ │ std::unordered_map<OrderID, list::iterator>     │ │
+│ │ - O(1) order lookup by ID                       │ │
+│ │ - O(1) cancellation via iterator                │ │
+│ └─────────────────────────────────────────────────┘ │
 └─────────────────────────────────────────────────────┘
-
+```
 ### Why This Design?
 
 | Component        | Data Structure                     | Purpose                                   | Complexity             |
@@ -90,62 +91,84 @@ The engine uses a **three-layer architecture** optimized for speed:
 
 ### Local Build
 
-# Clone the repository
+#### Clone the repository
 
-git clone https://github.com/YOUR_USERNAME/lob-matching-engine.git
-cd lob-matching-engine
+```bash
+git clone https://github.com/san4b0t/lob-engine.git
+cd lob-engine
+```
 
-# Configure with CMake
+#### Configure with CMake
 
+```bash
 mkdir build && cd build
 cmake .. -DCMAKE_BUILD_TYPE=Release
+```
 
-# Build
+#### Build
 
+```bash
 cmake --build . -j$(nproc)
+```
 
-# Run tests
+#### Run tests
 
+```bash
 ctest --output-on-failure
+```
 
-# Run benchmarks
+#### Run benchmarks
 
+```bash
 ./benchmarks/run_benchmarks
+```
 
 ### Debug Build with Sanitizers
 
+```bash
 cmake .. -DCMAKE_BUILD_TYPE=Debug -DENABLE_ASAN=ON
 cmake --build .
 ./tests/order_book_tests
+```
 
 ### Docker Build
 
-# Build Docker image
+#### Build Docker image
 
+```bash
 docker build -t lob-engine .
+```
 
-# Run tests in container
+#### Run tests in container
 
+```bash
 docker run --rm lob-engine ctest --output-on-failure
+```
 
-# Run benchmarks in container
+#### Run benchmarks in container
 
+```bash
 docker run --rm lob-engine ./run_benchmarks
+```
 
 ---
 
 ## 🧪 Testing
 
-### Run Unit Tests
+#### Run Unit Tests
 
+```bash
 cd build
 ./tests/order_book_tests
+```
 
-### Memory Leak Check (Valgrind)
+#### Memory Leak Check (Valgrind)
 
+```bash
 valgrind --leak-check=full --show-leak-kinds=all ./tests/order_book_tests
+```
 
-### Test Coverage
+#### Test Coverage
 
 - ✅ Basic order insertion and cancellation
 - ✅ Price-time priority enforcement
@@ -159,6 +182,7 @@ valgrind --leak-check=full --show-leak-kinds=all ./tests/order_book_tests
 
 ## 📦 Project Structure
 
+```text
 .
 ├── src/
 │ ├── Order.cpp
@@ -181,7 +205,7 @@ valgrind --leak-check=full --show-leak-kinds=all ./tests/order_book_tests
 │ └── ci.yml
 ├── CMakeLists.txt
 └── README.md
-
+```
 ---
 
 ## 🔄 CI/CD Pipeline
@@ -204,8 +228,6 @@ This matching engine is suitable for:
 - **Quantitative trading system prototypes**
 - **Exchange simulation and backtesting**
 - **Low-latency order routing systems**
-- **Educational projects on market microstructure**
-- **Portfolio projects for quant/HFT roles**
 
 ---
 
@@ -242,11 +264,11 @@ MIT License. See [LICENSE](LICENSE) for details.
 
 ## 👤 Author
 
-**Your Name** Building low-latency systems for quantitative trading.
+**Sanfo**
 
-📧 [your.email@example.com](mailto:your.email@example.com)  
-🔗 [LinkedIn](https://linkedin.com/in/yourprofile)  
-💻 [GitHub](https://github.com/YOUR_USERNAME)
+📧 [sanfo.bt@gmail.com](mailto:sanfo.bt@gmail.com)  
+🔗 [LinkedIn](https://linkedin.com/in/sanfo-thomas)  
+💻 [GitHub](https://github.com/san4b0t)
 
 ---
 
@@ -259,14 +281,3 @@ MIT License. See [LICENSE](LICENSE) for details.
 ---
 
 **⚡ Built for speed. Designed for production. Optimized for quant interviews.**
-
----
-
-**Instructions:**
-
-1. Copy everything inside the code block above
-2. Create a new file called `README.md` in your project root
-3. Paste the content
-4. Replace `YOUR_USERNAME` with your GitHub username
-5. Update the author section with your details
-6. Customize the repository name if different from `lob-matching-engine`
