@@ -21,5 +21,5 @@ TEST(OrderBookTest, CrossSpreadMatching)
     EXPECT_EQ(trades.size(), 1);
     EXPECT_EQ(trades[0].price, 100);
     EXPECT_EQ(trades[0].quantity, 5);
-    EXPECT_EQ(book.getBestAsk(), 100); // 5 left on the ask
+    EXPECT_EQ(book.getBestAsk(), 100);
 }

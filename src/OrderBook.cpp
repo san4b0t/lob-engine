@@ -1,11 +1,13 @@
 #include "../include/OrderBook.hpp"
 
-std::vector<Trade> OrderBook::addOrder(Order order)
+using namespace std;
+
+vector<Trade> OrderBook::addOrder(Order order)
 {
     if (order.quantity == 0)
         return {};
 
-    std::vector<Trade> trades = matchOrder(order);
+    vector<Trade> trades = matchOrder(order);
 
     if (order.quantity > 0 && order.type == OrderType::LIMIT)
     {
@@ -13,12 +15,12 @@ std::vector<Trade> OrderBook::addOrder(Order order)
         if (order.side == Side::BUY)
         {
             bids_[order.price].push_back(order);
-            it = std::prev(bids_[order.price].end());
+            it = prev(bids_[order.price].end());
         }
         else
         {
             asks_[order.price].push_back(order);
-            it = std::prev(asks_[order.price].end());
+            it = prev(asks_[order.price].end());
         }
         orderMap_[order.id] = it;
     }
@@ -26,9 +28,9 @@ std::vector<Trade> OrderBook::addOrder(Order order)
     return trades;
 }
 
-std::vector<Trade> OrderBook::matchOrder(Order &order)
+vector<Trade> OrderBook::matchOrder(Order &order)
 {
-    std::vector<Trade> trades;
+    vector<Trade> trades;
 
     if (order.side == Side::BUY)
     {
@@ -42,7 +44,7 @@ std::vector<Trade> OrderBook::matchOrder(Order &order)
 
             while (orderIt != level.end() && order.quantity > 0)
             {
-                uint64_t matchedQty = std::min(order.quantity, orderIt->quantity);
+                uint64_t matchedQty = min(order.quantity, orderIt->quantity);
                 trades.push_back({orderIt->id, order.id, it->first, matchedQty});
 
                 order.quantity -= matchedQty;
@@ -81,7 +83,7 @@ std::vector<Trade> OrderBook::matchOrder(Order &order)
 
             while (orderIt != level.end() && order.quantity > 0)
             {
-                uint64_t matchedQty = std::min(order.quantity, orderIt->quantity);
+                uint64_t matchedQty = min(order.quantity, orderIt->quantity);
                 trades.push_back({orderIt->id, order.id, it->first, matchedQty});
 
                 order.quantity -= matchedQty;
