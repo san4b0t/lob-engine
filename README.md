@@ -170,13 +170,13 @@ valgrind --leak-check=full --show-leak-kinds=all ./tests/order_book_tests
 
 #### Test Coverage
 
-- ✅ Basic order insertion and cancellation
-- ✅ Price-time priority enforcement
-- ✅ Limit order crossing spread
-- ✅ Market order full/partial fills
-- ✅ FIFO behavior within price levels
-- ✅ Edge cases: empty book, invalid orders, duplicate IDs
-- ✅ Stress tests: 10,000+ interleaved orders
+- Basic order insertion and cancellation
+- Price-time priority enforcement
+- Limit order crossing spread
+- Market order full/partial fills
+- FIFO behavior within price levels
+- Edge cases: empty book, invalid orders, duplicate IDs
+- Stress tests: 10,000+ interleaved orders
 
 ---
 
@@ -212,10 +212,10 @@ valgrind --leak-check=full --show-leak-kinds=all ./tests/order_book_tests
 
 Every push triggers:
 
-- ✅ **Build** (Debug + Release modes)
-- ✅ **Unit Tests** (Google Test)
-- ✅ **Memory Safety** (Valgrind leak checks)
-- ✅ **Sanitizers** (AddressSanitizer in Debug builds)
+- **Build** (Debug + Release modes)
+- **Unit Tests** (Google Test)
+- **Memory Safety** (Valgrind leak checks)
+- **Sanitizers** (AddressSanitizer in Debug builds)
 
 See [`.github/workflows/ci.yml`](.github/workflows/ci.yml) for full configuration.
 
