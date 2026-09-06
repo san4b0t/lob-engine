@@ -4,7 +4,7 @@
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![C++](https://img.shields.io/badge/C%2B%2B-17-blue.svg)
 
-A **high-performance, production-grade Limit Order Book matching engine** built in C++. Designed for **sub-microsecond latency** and suitable for **quantitative trading systems**, this project demonstrates core exchange mechanics with strict **price-time priority**, **O(1) order cancellation**, and memory-safe implementation.
+A high-performance, **Limit Order Book matching engine** built in C++. Designed for **sub-microsecond latency** and suitable for projects adjacent to **quantitative trading systems**, this tool employs core exchange mechanics with strict price-time priority, constant-time order cancellation, and memory-safe implementation.
 
 ---
 
@@ -12,7 +12,7 @@ A **high-performance, production-grade Limit Order Book matching engine** built 
 
 - **Price-Time Priority Matching**: Strict FIFO execution within each price level
 - **Order Types**: Market orders, limit orders, cancellations, and modifications
-- **O(1) Order Cancellation**: Achieved via hash map + doubly-linked list design
+- **Constant-time Order Cancellation**: Achieved via hash map + doubly-linked list design
 - **Ultra-Low Latency**: **96.62 ns/order** average latency, **10.35M ops/sec** throughput
 - **Memory Safe**: Valgrind-verified, zero leaks, RAII-compliant C++17 code
 - **Fully Tested**: Comprehensive Google Test suite with edge-case coverage
